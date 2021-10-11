@@ -2,6 +2,11 @@ import React, { Component } from "react";
 import FormInput from "../form-input/form-input.componrnt";
 import CustomButton from "../custom-button/custom-button.component";
 import "./sign-in.styles.scss";
+import {
+  signInWithGooglePopup,
+  credentialResult,
+  credentialError,
+} from "../../firebase/firebase.utils";
 
 export default class SignIn extends Component {
   constructor(props) {
@@ -29,6 +34,28 @@ export default class SignIn extends Component {
     this.setState({ [name]: value });
   };
 
+  handleGoogleAuthClick = () => {
+    signInWithGooglePopup()
+      .then((result) => {
+        // This gives you a Google Access Token. You can use it to access the Google API.
+        const credential = credentialResult(result);
+        const token = credential.accessToken;
+        // The signed-in user info.
+        const user = result.user;
+        // ...
+      })
+      .catch((error) => {
+        // Handle Errors here.
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // The email of the user's account used.
+        const email = error.email;
+        // The AuthCredential type that was used.
+        const credential = credentialError(error);
+        // ...
+      });
+  };
+
   render() {
     return (
       <div className="sign-in">
@@ -54,7 +81,12 @@ export default class SignIn extends Component {
             required
           />
 
-          <CustomButton type="submit">Sign in</CustomButton>
+          <div className="buttons">
+            <CustomButton type="submit">Sign in</CustomButton>
+            <CustomButton onClick={signInWithGooglePopup} isGoogleSigIn>
+              Sign in with Google
+            </CustomButton>
+          </div>
         </form>
       </div>
     );
