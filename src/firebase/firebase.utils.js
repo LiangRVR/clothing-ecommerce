@@ -7,6 +7,7 @@ import {
   GoogleAuthProvider,
   signOut,
   createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
 } from "firebase/auth";
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -39,6 +40,9 @@ export const auth = getAuth();
 
 export const createAccountWithEmailAndPassword = (email, password) =>
   createUserWithEmailAndPassword(auth, email, password);
+
+export const signInAccountWithEmailAndPassword = (email, password) =>
+  signInWithEmailAndPassword(auth, email, password);
 
 export const signInWithGooglePopup = () => signInWithPopup(auth, provider);
 

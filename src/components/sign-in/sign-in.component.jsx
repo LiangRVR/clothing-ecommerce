@@ -6,6 +6,7 @@ import {
   signInWithGooglePopup,
   credentialResult,
   credentialError,
+  signInAccountWithEmailAndPassword,
 } from "../../firebase/firebase.utils";
 
 export default class SignIn extends Component {
@@ -20,7 +21,18 @@ export default class SignIn extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
+    const { email, password } = this.state;
 
+    signInAccountWithEmailAndPassword(email, password)
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log({ errorCode: error.code, errorMessage: error.message });
+      });
     this.setState({
       email: "",
       password: "",
@@ -29,7 +41,6 @@ export default class SignIn extends Component {
 
   handleChange = (e) => {
     const { value, name } = e.target;
-    console.log(value, name);
 
     this.setState({ [name]: value });
   };
