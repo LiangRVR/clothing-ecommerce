@@ -3,9 +3,9 @@ import FormInput from "../form-input/form-input.componrnt";
 import CustomButton from "../custom-button/custom-button.component";
 import "./sign-in.styles.scss";
 import {
-  signInWithGooglePopup,
-  credentialResult,
-  credentialError,
+  signInWithGooglePopup /*
+  ,credentialResult,
+  credentialError,*/,
   signInAccountWithEmailAndPassword,
 } from "../../firebase/firebase.utils";
 
@@ -26,11 +26,9 @@ export default class SignIn extends Component {
     signInAccountWithEmailAndPassword(email, password)
       .then((userCredential) => {
         // Signed in
-        const user = userCredential.user;
+        //const user = userCredential.user;
       })
       .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
         console.log({ errorCode: error.code, errorMessage: error.message });
       });
     this.setState({

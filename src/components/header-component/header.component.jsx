@@ -8,9 +8,7 @@ import "./header.styles.scss";
 import { signOutAccount } from "../../firebase/firebase.utils";
 
 function Header({ currentUser }) {
-  console.log(currentUser)
   const handleClick = () => {
-    console.log(signOutAccount());
     signOutAccount()
       .then(() => {
         console.log("Sign-out successful");
@@ -46,7 +44,7 @@ function Header({ currentUser }) {
   );
 }
 
-const mapStatetoProps = state => ({
+const mapStatetoProps = (state) => ({
   currentUser: state.user.currentUser,
 });
 
