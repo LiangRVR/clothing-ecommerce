@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 
 import { ReactComponent as Logo } from "../../assets/crown.svg";
 import "./header.styles.scss";
@@ -7,8 +8,9 @@ import "./header.styles.scss";
 import { signOutAccount } from "../../firebase/firebase.utils";
 
 function Header({ currentUser }) {
+  console.log(currentUser)
   const handleClick = () => {
-    console.log(signOutAccount())
+    console.log(signOutAccount());
     signOutAccount()
       .then(() => {
         console.log("Sign-out successful");
@@ -44,4 +46,8 @@ function Header({ currentUser }) {
   );
 }
 
-export default Header;
+const mapStatetoProps = state => ({
+  currentUser: state.user.currentUser,
+});
+
+export default connect(mapStatetoProps)(Header);
