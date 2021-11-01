@@ -9,12 +9,10 @@ import "./directory.styles.scss";
 
 function Directory({ sections }) {
   return (
-    <div>
-      <div className="directory-menu">
-        {sections.map(({ id, ...otherSectionProps }) => (
-          <MenuItems key={id} {...otherSectionProps} />
-        ))}
-      </div>
+    <div className="directory-menu">
+      {sections.map(({ id, ...otherSectionProps }) => (
+        <MenuItems key={id} {...otherSectionProps} />
+      ))}
     </div>
   );
 }
