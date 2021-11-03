@@ -8,6 +8,8 @@ import {
   createUserProfileDocument,
 } from "../../firebase/firebase.utils";
 
+import { SignUpContainer, SignUpTitle } from './sign-up.styles';
+
 export default class SignUp extends Component {
   constructor(props) {
     super(props);
@@ -68,8 +70,8 @@ export default class SignUp extends Component {
     const { displayName, email, password, confirmPassword } = this.state;
 
     return (
-      <div className="sign-up">
-        <h1 className="title">I do not have an account</h1>
+      <SignUpContainer>
+        <SignUpTitle>I do not have an account</SignUpTitle>
         <span>Sign up with your email and password</span>
         <form className="sing-up-form" onSubmit={this.handleSubmit}>
           <FormInput
@@ -106,7 +108,7 @@ export default class SignUp extends Component {
           />
           <CustomButton type="submit">Sign Up</CustomButton>
         </form>
-      </div>
+      </SignUpContainer>
     );
   }
 }

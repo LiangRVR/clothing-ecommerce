@@ -11,22 +11,28 @@ import {
   selectCartTotal,
 } from "../../redux/cart/cart.selectors";
 
-import "./cart-dropdown.styles.scss";
+import {
+  CartDropdownContainer,
+  CartItemsContainer,
+  EmptyMessage,
+  TotalAmount,
+} from "./cart-dropdown.styles";
+
 
 function CartDropdown({ cartItems, total, history, toggleCartHidden }) {
   return (
-    <div className="cart-dropdown">
-      <div className="cart-items">
+    <CartDropdownContainer>
+      <CartItemsContainer>
         {cartItems.length ? (
           cartItems.map((item) => <CartItem key={item.id} item={item} />)
         ) : (
-          <span className="empty-message">You cart is empty</span>
+          <EmptyMessage>You cart is empty</EmptyMessage>
         )}
-      </div>
+      </CartItemsContainer>
       {cartItems.length ? (
-        <div className="total">
+        <TotalAmount>
           <span>Total: $ {total}</span>
-        </div>
+        </TotalAmount>
       ) : null}
 
       <CustomButton
@@ -37,7 +43,7 @@ function CartDropdown({ cartItems, total, history, toggleCartHidden }) {
       >
         GO TO CHECKOUT
       </CustomButton>
-    </div>
+    </CartDropdownContainer>
   );
 }
 
