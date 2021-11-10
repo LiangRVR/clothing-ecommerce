@@ -108,8 +108,8 @@ const SHOP_DATA = {
         price: 190,
       },
       {
-        id: 17,
         name: "Timberlands",
+        id: 17,
         imageUrl: "https://i.ibb.co/Mhh6wBg/timberlands.png",
         price: 200,
       },

@@ -12,9 +12,13 @@ import CheckOut from "./pages/checkout/checkout.component";
 
 //Components
 import Header from "./components/header-component/header.component";
-import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
+
+//redux
 import { setCurrentUser } from "./redux/user/user.actions";
 import { selectCurrentuser } from "./redux/user/user.selector";
+
+//firebase-utils
+import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
 
 //firebase functions
 import { onAuthStateChanged } from "@firebase/auth";
