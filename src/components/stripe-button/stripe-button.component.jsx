@@ -3,7 +3,7 @@ import StripeCheckout from "react-stripe-checkout";
 
 import CustomButton from "../custom-button/custom-button.component";
 
-function StripeButtonComponent({ price }) {
+const StripeButtonComponent = ({ price }) => {
   const priceForStripe = price * 100;
   const publishableKey =
     "pk_test_51HW6xKEaVGofRHMLtgyTqkpJxcv8Wv6r2cQcwqjDnneLcUswMesx2YlhQqGfPWEN5rhqoiYP1xLYx3L9y8PqbBA600IUHZAFtD";
@@ -28,6 +28,6 @@ function StripeButtonComponent({ price }) {
       <CustomButton>Pay Now</CustomButton>
     </StripeCheckout>
   );
-}
+};
 
 export default StripeButtonComponent;

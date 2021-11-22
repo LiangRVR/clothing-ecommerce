@@ -9,7 +9,7 @@ import {
   ContentSubtitle,
 } from "./menu-item.styles";
 
-function MenuItem({ title, imageUrl, size, linkUrl, history, match }) {
+const MenuItem = ({ title, imageUrl, size, linkUrl, history, match }) => {
   return (
     <MenuItemContainer
       size={size}
@@ -25,6 +25,6 @@ function MenuItem({ title, imageUrl, size, linkUrl, history, match }) {
       </ContentContainer>
     </MenuItemContainer>
   );
-}
+};
 
 export default withRouter(MenuItem);

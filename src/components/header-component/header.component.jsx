@@ -19,7 +19,7 @@ import {
   OptionsConatiner,
 } from "./header.styles";
 
-function Header({ currentUser, hidden, signOutStart }) {
+const Header = ({ currentUser, hidden, signOutStart }) => {
   const handleClick = () => {
     signOutStart()
   };

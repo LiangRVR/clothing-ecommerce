@@ -9,7 +9,7 @@ import {
 
 import CollectionItems from "../collection-item/collection-item.component";
 
-function CollectionPreview({ title, items, history, match, routeName }) {
+const CollectionPreview=({ title, items, history, match, routeName })=> {
   return (
     <CollectionPreviewContainer>
       <TitleContainer

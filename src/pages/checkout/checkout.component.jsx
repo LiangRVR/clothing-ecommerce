@@ -18,7 +18,7 @@ import {
   WarningContainer,
 } from "./checkout.styles";
 
-function CheckOut({ cartItems, total }) {
+const CheckOut = ({ cartItems, total }) => {
   return (
     <CheckoutPageContainer>
       <CheckoutHeaderContainer>
@@ -52,7 +52,7 @@ function CheckOut({ cartItems, total }) {
       <StripeButtonComponent price={total} />
     </CheckoutPageContainer>
   );
-}
+};
 
 const mapStateToProps = createStructuredSelector({
   cartItems: selectCartItems,

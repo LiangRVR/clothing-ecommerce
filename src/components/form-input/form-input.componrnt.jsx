@@ -5,7 +5,7 @@ import {
   FormInputLabel,
 } from "./form-input.styles";
 
-function FormInput({ handleChange, label, ...otherProps }) {
+const FormInput = ({ handleChange, label, ...otherProps }) => {
   return (
     <GroupContainer>
       <FormInputContainer onChange={handleChange} {...otherProps} />

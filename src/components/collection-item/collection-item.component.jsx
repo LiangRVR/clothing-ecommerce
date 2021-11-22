@@ -13,7 +13,7 @@ import { connect } from "react-redux";
 
 import { addItem } from "../../redux/cart/cart.actions";
 
-function CollectionItem({ item, addItem }) {
+const CollectionItem = ({ item, addItem }) =>{
   const { name, price, imageUrl } = item;
 
   return (

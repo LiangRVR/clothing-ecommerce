@@ -11,7 +11,7 @@ import {
   CollectionItemsContainer,
 } from "./collection.styles";
 
-function CollectionPage({ collection }) {
+const CollectionPage = ({ collection }) => {
   const { title, items } = collection;
   return (
     <CollectionPageContainer>
@@ -23,7 +23,7 @@ function CollectionPage({ collection }) {
       </CollectionItemsContainer>
     </CollectionPageContainer>
   );
-}
+};
 
 const mapStateToProps = (state, ownProps) => ({
   collection: selectCollection(ownProps.match.params.collectionId)(state),

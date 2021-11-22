@@ -15,7 +15,7 @@ import {
   TextContainer,
 } from "./checkout-item.styles";
 
-function CheckoutItem({ cartItem, clearItem, addItem, removeItem }) {
+const CheckoutItem = ({ cartItem, clearItem, addItem, removeItem }) => {
   const { name, imageUrl, quantity, price } = cartItem;
   return (
     <CheckoutItemContainer>

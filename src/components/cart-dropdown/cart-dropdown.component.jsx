@@ -19,7 +19,7 @@ import {
 } from "./cart-dropdown.styles";
 
 
-function CartDropdown({ cartItems, total, history, toggleCartHidden }) {
+const CartDropdown = ({ cartItems, total, history, toggleCartHidden }) => {
   return (
     <CartDropdownContainer>
       <CartItemsContainer>
