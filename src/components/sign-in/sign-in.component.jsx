@@ -1,19 +1,21 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+
 import FormInput from "../form-input/form-input.componrnt";
 import CustomButton from "../custom-button/custom-button.component";
 import {
   SignInContainer,
   SignInTitle,
-  ButtonsBarContainer
-} from './sign-in.styles';
-import {
-  signInWithGooglePopup /*
-  ,credentialResult,
-  credentialError,*/,
-  signInAccountWithEmailAndPassword,
-} from "../../firebase/firebase.utils";
+  ButtonsBarContainer,
+} from "./sign-in.styles";
 
-export default class SignIn extends Component {
+import {
+  googleSignInStart,
+  emailSignInStart,
+} from "../../redux/user/user.actions";
+
+
+class SignIn extends Component {
   constructor(props) {
     super(props);
 
@@ -26,15 +28,8 @@ export default class SignIn extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
     const { email, password } = this.state;
-
-    signInAccountWithEmailAndPassword(email, password)
-      .then((userCredential) => {
-        // Signed in
-        //const user = userCredential.user;
-      })
-      .catch((error) => {
-        console.log({ errorCode: error.code, errorMessage: error.message });
-      });
+    const { emailSignInStart } = this.props;
+    emailSignInStart(email, password);
     this.setState({
       email: "",
       password: "",
@@ -47,33 +42,8 @@ export default class SignIn extends Component {
     this.setState({ [name]: value });
   };
 
-  handleGoogleAuthClick = () => {
-    signInWithGooglePopup()
-      .then((result) => {
-        /*
-        // This gives you a Google Access Token. You can use it to access the Google API.
-        const credential = credentialResult(result);
-        const token = credential.accessToken;
-        // The signed-in user info.
-        const user = result.user;
-        // ...
-        */
-      })
-      .catch((error) => {
-        /*
-        // Handle Errors here.
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        // The email of the user's account used.
-        const email = error.email;
-        // The AuthCredential type that was used.
-        const credential = credentialError(error);
-        // ...
-        */
-      });
-  };
-
   render() {
+    const { googleSignInStart } = this.props;
     return (
       <SignInContainer>
         <SignInTitle>I Already have an account</SignInTitle>
@@ -100,7 +70,11 @@ export default class SignIn extends Component {
 
           <ButtonsBarContainer>
             <CustomButton type="submit">Sign in</CustomButton>
-            <CustomButton onClick={signInWithGooglePopup} isGoogleSigIn>
+            <CustomButton
+              type="button"
+              onClick={googleSignInStart}
+              isGoogleSigIn
+            >
               Sign in with Google
             </CustomButton>
           </ButtonsBarContainer>
@@ -109,3 +83,11 @@ export default class SignIn extends Component {
     );
   }
 }
+
+const mapDipstachToProps = (dispatch) => ({
+  googleSignInStart: () => dispatch(googleSignInStart()),
+  emailSignInStart: (email, password) =>
+    dispatch(emailSignInStart({ email, password })),
+});
+
+export default connect(null, mapDipstachToProps)(SignIn);

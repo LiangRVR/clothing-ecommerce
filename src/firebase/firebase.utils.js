@@ -15,6 +15,7 @@ import {
   signOut,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  onAuthStateChanged,
 } from "firebase/auth";
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -37,13 +38,20 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 //auth
-const provider = new GoogleAuthProvider();
-provider.addScope("https://www.googleapis.com/auth/contacts.readonly");
-provider.setCustomParameters({
+export const auth = getAuth();
+
+const GoogleProvider = new GoogleAuthProvider();
+GoogleProvider.addScope("https://www.googleapis.com/auth/contacts.readonly");
+GoogleProvider.setCustomParameters({
   prompt: "select_account",
 });
 
-export const auth = getAuth();
+export const credentialResult = GoogleAuthProvider.credentialFromResult;
+
+export const credentialError = GoogleAuthProvider.credentialFromError;
+
+export const signInWithGooglePopup = () =>
+  signInWithPopup(auth, GoogleProvider);
 
 export const createAccountWithEmailAndPassword = (email, password) =>
   createUserWithEmailAndPassword(auth, email, password);
@@ -51,13 +59,7 @@ export const createAccountWithEmailAndPassword = (email, password) =>
 export const signInAccountWithEmailAndPassword = (email, password) =>
   signInWithEmailAndPassword(auth, email, password);
 
-export const signInWithGooglePopup = () => signInWithPopup(auth, provider);
-
 export const signOutAccount = () => signOut(auth);
-
-export const credentialResult = GoogleAuthProvider.credentialFromResult;
-
-export const credentialError = GoogleAuthProvider.credentialFromError;
 
 export const createUserProfileDocument = async (userAuth, additionalData) => {
   if (!userAuth) return;
@@ -116,4 +118,17 @@ export const convertCollectionSnapShotToMap = (collection) => {
     accumulator[collection.title.toLowerCase()] = collection;
     return accumulator;
   }, {});
+};
+
+export const getCurrentUser = () => {
+  return new Promise((resolve, reject) => {
+    const unsubscribe = onAuthStateChanged(
+      auth,
+      (userAuth) => {
+        unsubscribe();
+        resolve(userAuth);
+      },
+      reject
+    );
+  });
 };
