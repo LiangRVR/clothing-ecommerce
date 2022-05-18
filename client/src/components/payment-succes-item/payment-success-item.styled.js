@@ -8,7 +8,6 @@ export const PaymentSuccessItemContainer = styled.div`
   padding: 10px 0;
   display: flex;
   justify-content: space-between;
-  
 `;
 
 export const ItemImageContainer = styled.div`
@@ -18,6 +17,9 @@ export const ItemImageContainer = styled.div`
     width: 100%;
     height: 100%;
   }
+  @media screen and (max-width: 800px){
+    width: 22%;
+  }
 `;
 
 export const TextContainer = styled.span`
@@ -25,5 +27,12 @@ export const TextContainer = styled.span`
   text-align: center;
   &:last-child {
     width: 4%;
+  }
+  @media screen and (max-width: 800px) {
+    width: 22%;
+    font-size: 16px;
+    &:last-child {
+      width: 9%;
+    }
   }
 `;

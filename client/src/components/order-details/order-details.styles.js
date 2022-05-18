@@ -2,6 +2,9 @@ import styled from "styled-components";
 
 export const OrderDetailContainer = styled.div`
     background-color: white;
+    @media screen and (max-width: 800px){
+        display: none;
+    }
 `
 
 export const OrderItemsContainer = styled.div`
@@ -17,7 +20,7 @@ export const OrderItemsContainer = styled.div`
 export const OrderDetailTitle = styled.div`
     display: flex;
     align-content: center;
-    p{  
+    p{
         margin: auto 10px;
     }
 `

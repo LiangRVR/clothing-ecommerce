@@ -14,16 +14,28 @@ export const FormAndSummaryContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  @media screen and (max-width: 800px){
+    flex-direction: column-reverse;
+    align-items: center;
+  }
 `;
 
 export const FormContainer = styled.div`
   flex-grow: 0.6;
-  max-width: 800px;
+  max-width: 65%;
+  @media screen and (max-width: 800px){
+    width: 80%;
+    max-width: unset;
+  }
 `;
 
 export const SummaryAndCartDetailContainer = styled.div`
   display: flex;
   flex-direction: column;
   flex-grow: 0.4;
-  max-width: 250px;
+  max-width: 30%;
+  @media screen and (max-width: 800px){
+    width: 80%;
+    max-width: unset;
+  }
 `;

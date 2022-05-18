@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import "./App.css";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -13,6 +12,8 @@ import PaymentSucces from "./pages/payment-success/payment-success.component";
 
 //Components
 import Header from "./components/header-component/header.component";
+
+import { GlobalStyle } from "./global.styles";
 
 //redux
 import { selectCurrentuser } from "./redux/user/user.selector";
@@ -30,6 +31,7 @@ const App = () => {
 
   return (
     <div>
+      <GlobalStyle />
       <Header />
       <Switch>
         <Route exact path="/" component={HomePage} />

@@ -31,6 +31,14 @@ export const FormContainer = styled.form`
     justify-content: center;
     align-items: center;
     margin-left: auto;
+    @media screen and (max-width: 800px) {
+        min-width: unset;
+        width: 45%;
+    }
+  }
+  @media screen and (max-width: 800px) {
+    min-width: unset;
+    width: 100%
   }
 `;
 
