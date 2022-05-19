@@ -4,6 +4,7 @@ import express from "express";
 import path from "path";
 import dotenv from "dotenv";
 import Stripe from "stripe";
+import compression from 'compression'
 
 if (process.env.NODE_ENV !== "production") dotenv.config();
 
@@ -17,6 +18,7 @@ const __dirname = path.resolve();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(compression());
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "client/build")));
