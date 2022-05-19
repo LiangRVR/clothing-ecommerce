@@ -22,7 +22,6 @@ const CheckoutItem = ({ cartItem }) => {
   const clearItemHandler = (item) => dispatch(clearItemFromCart(item));
   const addItemHandler = (item) => dispatch(addItem(item));
   const removeItemHandler = (item) => dispatch(removeItem(item));
-
   return (
     <CheckoutItemContainer>
       <ImageConatiner>
@@ -43,4 +42,4 @@ const CheckoutItem = ({ cartItem }) => {
   );
 };
 
-export default CheckoutItem;
+export default React.memo(CheckoutItem);
