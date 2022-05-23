@@ -4,7 +4,8 @@ import express from "express";
 import path from "path";
 import dotenv from "dotenv";
 import Stripe from "stripe";
-import compression from 'compression'
+import compression from "compression";
+import enforce from "express-sslify";
 
 if (process.env.NODE_ENV !== "production") dotenv.config();
 
@@ -19,6 +20,7 @@ const __dirname = path.resolve();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(compression());
+app.use(enforce.HTTPS({ trustProtoHeader: true }));
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "client/build")));
@@ -30,6 +32,10 @@ if (process.env.NODE_ENV === "production") {
 app.listen(port, (error) => {
   if (error) throw error;
   console.log(`Server running on port ${port}`);
+});
+
+app.get("/service-worker.js", (req, res) => {
+  res.sendFile(path.join(__dirname, "..", "build", "serviceWorker.js"));
 });
 
 app.post("/payment/create", async (req, res) => {
