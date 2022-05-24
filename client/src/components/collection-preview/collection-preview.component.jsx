@@ -7,7 +7,8 @@ import {
   PreviewContainer,
 } from "./collection-preview.styles";
 
-import CollectionItems from "../collection-item/collection-item.component";
+import CollectionItem from "../collection-item/collection-item.component";
+
 
 const CollectionPreview = ({ title, items, routeName }) => {
   const history = useHistory();
@@ -23,7 +24,7 @@ const CollectionPreview = ({ title, items, routeName }) => {
         {items
           .filter((item, idx) => idx < 4)
           .map((item) => (
-            <CollectionItems key={item.id} item={item} />
+            <CollectionItem key={item.id} item={item} />
           ))}
       </PreviewContainer>
     </CollectionPreviewContainer>
