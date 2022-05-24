@@ -35,7 +35,7 @@ app.listen(port, (error) => {
 });
 
 app.get("/service-worker.js", (req, res) => {
-  res.sendFile(path.join(__dirname, "..", "build", "serviceWorker.js"));
+  res.sendFile(path.join(__dirname, "..", "build", "service-worker.js"));
 });
 
 app.post("/payment/create", async (req, res) => {
