@@ -20,7 +20,7 @@ const ProgressIndicator = () => {
         const active = index <= indexActive;
         const lineActive = index <= indexActive - 1;
         return (
-          <StepContainer>
+          <StepContainer key ={item}>
             <IndicatorSign active={active} />
             <IndicatorText active={active}>{item}</IndicatorText>
             {index < sections.length - 1 ? (

@@ -31,7 +31,7 @@ const PaymentFormContainer = () => {
     state,
     zipCode,
   } = useSelector(selectBillingData);
-  
+
   useEffect(() => {
     const priceForStripe = totalPrice * 100;
     axios

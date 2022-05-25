@@ -3,7 +3,7 @@ import { useStripe, useElements } from "@stripe/react-stripe-js";
 
 import { useParams, useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { setPaymentStatus } from "../../redux/payment/payment.actions";
+import { setPaymentDone } from "../../redux/payment/payment.actions";
 
 import CustomButton from "../custom-button/custom-button.component";
 
@@ -21,7 +21,7 @@ const PaymentForm = () => {
   const params = useParams();
   const dispatch = useDispatch();
   const history = useHistory();
-  const paymentStatusHandler = (status) => dispatch(setPaymentStatus(status));
+  const paymentDoneHandler = (status) => dispatch(setPaymentDone(status));
 
   const [message, setMessage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -65,7 +65,7 @@ const PaymentForm = () => {
     }
 
     setIsLoading(true);
-    paymentStatusHandler(true);
+    paymentDoneHandler(true);
     const { error } = await stripe.confirmPayment({
       elements,
       redirect: "if_required",
@@ -82,10 +82,10 @@ const PaymentForm = () => {
         default:
           setMessage("An unexpected error occured.");
       }
-      paymentStatusHandler(false);
-      return 
+      paymentDoneHandler(false);
+      return
     }
-      history.push("/checkout/payment/done")  
+      history.push("/checkout/payment/done")
   };
 
   return (

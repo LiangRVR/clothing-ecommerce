@@ -12,7 +12,7 @@ import { GlobalStyle } from "./global.styles";
 //redux
 import { selectCurrentuser } from "./redux/user/user.selector";
 import { checkUserSession } from "./redux/user/user.actions";
-import { selectPaymentStatus } from "./redux/payment/payment.selectors";
+import { selectPaymentDone } from "./redux/payment/payment.selectors";
 
 //Lazy Pages
 const HomePage = lazy(() => import("./pages/homepage/homepage.component"));
@@ -28,7 +28,7 @@ const PaymentSucces = lazy(() =>
 
 const App = () => {
   const currentUser = useSelector(selectCurrentuser);
-  const paymentStatus = useSelector(selectPaymentStatus);
+  const paymentDone = useSelector(selectPaymentDone);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -37,24 +37,26 @@ const App = () => {
 
   return (
     <div>
-      <GlobalStyle/>
-        <Header />
-        <Switch>
-          <ErrorBoundary>
-            <Suspense fallback={<Spinner />}>
-              <Route exact path="/" component={HomePage} />
-              <Route path="/shop" component={ShopPage} />
-              <Route exact path="/checkout" component={CheckOut} />
-              <Route exact path="/checkout/payment" component={Payment} />
-              <Route exact path="/signin">
-                {currentUser ? <Redirect to="/" /> : <SignInAndSignUp />}
-              </Route>
-              <Route exact path="/checkout/payment/done">
-                {paymentStatus ? <PaymentSucces /> : <Redirect to="/" />}
-              </Route>
-            </Suspense>
-          </ErrorBoundary>
-        </Switch>
+      <GlobalStyle />
+      <Header />
+      <Switch>
+        <ErrorBoundary>
+          <Suspense fallback={<Spinner />}>
+            <Route exact path="/" component={HomePage} />
+            <Route path="/shop" component={ShopPage} />
+            <Route exact path="/checkout" component={CheckOut} />
+            <Route exact path="/checkout/payment">
+              {currentUser ? <Payment /> : <SignInAndSignUp />}
+            </Route>
+            <Route exact path="/signin">
+              {currentUser ? <Redirect to="/" /> : <SignInAndSignUp />}
+            </Route>
+            <Route exact path="/checkout/payment/done">
+              {paymentDone ? <PaymentSucces /> : <Redirect to="/" />}
+            </Route>
+          </Suspense>
+        </ErrorBoundary>
+      </Switch>
     </div>
   );
 };

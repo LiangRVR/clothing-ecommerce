@@ -9,13 +9,27 @@ export const addItem = (item) => ({
   payload: item,
 });
 
+export const addCartsItemsfromFirebase = (items) => ({
+  type: CartActionsTypes.ADD_CARTS_ITEMS_FROM_FIREBASE,
+  payload: items,
+});
+
 export const removeItem = (item) =>({
   type: CartActionsTypes.REMOVE_ITEM,
   payload: item,
 })
 
-export const clearCart = () =>({
-  type: CartActionsTypes.CLEAR_CART,
+export const updateCartItemsOnFirebase = () =>({
+  type: CartActionsTypes.UPDATE_CARTS_ITEMS_ON_FIREBASE,
+})
+
+
+export const clearCartOnState = () =>({
+  type: CartActionsTypes.CLEAR_CART_ON_STATE,
+})
+
+export const clearCartOnFirebaseAndState = () =>({
+  type: CartActionsTypes.CLEAR_CART_ON_FIREBASE_AND_STATE,
 })
 
 export const clearItemFromCart = (item) => ({

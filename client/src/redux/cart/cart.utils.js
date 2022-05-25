@@ -1,4 +1,4 @@
-export const addItemToCart = (cartItems, cartItemToAdd) => {
+export const addItemToCart = (cartItems, cartItemToAdd, quantityToAdd = 1) => {
   const cartItemExist = cartItems.find(
     (cartItem) => cartItem.id === cartItemToAdd.id
   );
@@ -6,14 +6,22 @@ export const addItemToCart = (cartItems, cartItemToAdd) => {
   if (cartItemExist) {
     return cartItems.map((cartItem) => {
       if (cartItem.id === cartItemToAdd.id) {
-        return { ...cartItem, quantity: cartItem.quantity + 1 };
+        return { ...cartItem, quantity: cartItem.quantity + quantityToAdd };
       }
       return cartItem;
     });
   }
 
-  return [...cartItems, { ...cartItemToAdd, quantity: 1 }];
+  return [...cartItems, { ...cartItemToAdd, quantity: quantityToAdd }];
 };
+
+export const addItemsToCart = (cartItems, cartItemsToAdd) =>{
+  let cartItemsNew = [...cartItems]
+  cartItemsToAdd.forEach(({quantity,...cartItem}) => {
+    cartItemsNew = addItemToCart(cartItemsNew, cartItem, quantity)
+  });
+  return cartItemsNew;
+}
 
 export const removeItemFromCart = (cartItems, cartItemToRemove) => {
   const cartItemExist = cartItems.find(

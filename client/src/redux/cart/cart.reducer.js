@@ -1,5 +1,9 @@
 import { CartActionsTypes } from "./cart.types";
-import { addItemToCart, removeItemFromCart } from "./cart.utils";
+import {
+  addItemToCart,
+  addItemsToCart,
+  removeItemFromCart,
+} from "./cart.utils";
 
 const INITIAL_STATE = {
   hidden: true,
@@ -20,12 +24,19 @@ const cartReducer = (state = INITIAL_STATE, action) => {
         cartItems: addItemToCart(state.cartItems, action.payload),
       };
 
+    case CartActionsTypes.ADD_CARTS_ITEMS_FROM_FIREBASE:
+      return {
+        ...state,
+        cartItems: addItemsToCart(state.cartItems, action.payload),
+      };
+
     case CartActionsTypes.REMOVE_ITEM:
       return {
         ...state,
         cartItems: removeItemFromCart(state.cartItems, action.payload),
       };
-    case CartActionsTypes.CLEAR_CART:
+    case CartActionsTypes.CLEAR_CART_ON_STATE:
+    case CartActionsTypes.CLEAR_CART_ON_FIREBASE_AND_STATE:
       return {
         ...state,
         cartItems: [],
@@ -37,7 +48,7 @@ const cartReducer = (state = INITIAL_STATE, action) => {
           (cartItem) => cartItem.id !== action.payload.id
         ),
       };
-
+    case CartActionsTypes.UPDATE_CARTS_ITEMS_ON_FIREBASE:
     default:
       return state;
   }

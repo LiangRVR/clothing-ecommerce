@@ -3,6 +3,9 @@ import { initializeApp } from "firebase/app";
 import {
   getFirestore,
   getDoc,
+  getDocs,
+  query,
+  where,
   doc,
   setDoc,
   collection,
@@ -17,9 +20,6 @@ import {
   signInWithEmailAndPassword,
   onAuthStateChanged,
 } from "firebase/auth";
-
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -85,6 +85,25 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
   }
 
   return userRef;
+};
+
+export const getUserCartRef = async (userId) => {
+  const q = query(collection(db, "carts"), where("userId", "==", userId));
+  const cartsSnapshot = await getDocs(q);
+
+  if (cartsSnapshot.empty) {
+    const cartsRef = doc(collection(db, "carts"));
+    try {
+      setDoc(cartsRef, {
+        userId,
+        cartItems: [],
+      });
+      return cartsRef;
+    } catch (error) {
+      console.log("error creating cart User", error.message);
+    }
+  }
+  return cartsSnapshot.docs[0].ref;
 };
 
 export const addCollectionAndDocuments = async (collectionKey, objectToAdd) => {

@@ -31,7 +31,7 @@ const Shipping = () => {
 
   const [giftMessage, setGiftMessage] = useState("");
 
-  
+
   useEffect(() => {
     if (shippingData) {
       const {
@@ -81,7 +81,7 @@ const Shipping = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const shippingAddress =
-      giftMessage.length > 0
+      giftMessage.length
         ? {
             ...contact,
             ...address,

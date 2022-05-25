@@ -2,8 +2,8 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 
-import { clearCart } from "../../redux/cart/cart.actions";
-import { changeActiveForm, setPaymentStatus } from "../../redux/payment/payment.actions";
+import { clearCartOnFirebaseAndState } from "../../redux/cart/cart.actions";
+import { changeActiveForm, setPaymentDone } from "../../redux/payment/payment.actions";
 
 import {
   selectCartItems,
@@ -44,8 +44,8 @@ const PaymentSucces = () => {
 
   const clickHandler = () => {
     dispatch(changeActiveForm("Shipping Address"));
-    dispatch(clearCart());
-    dispatch(setPaymentStatus())
+    dispatch(clearCartOnFirebaseAndState());
+    dispatch(setPaymentDone(false))
     history.push("/");
   };
 

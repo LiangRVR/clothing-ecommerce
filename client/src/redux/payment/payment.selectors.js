@@ -17,7 +17,7 @@ export const selectActiveForm = createSelector(
   (payment) => payment.activeForm
 );
 
-export const selectPaymentStatus = createSelector(
+export const selectPaymentDone = createSelector(
   [selectPayment],
   (payment) => payment.paymentDone
 )

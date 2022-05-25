@@ -17,7 +17,6 @@ const CollectionPage = () => {
   const { title, items } = useSelector(selectCollection(collectionId));
   useEffect(()=>{
     window.scroll(0, 0);
-    console.log('render: ',title)
   },[title])
 
   return (

@@ -15,7 +15,7 @@ export const changeActiveForm = (formName) => ({
   payload: formName,
 });
 
-export const setPaymentStatus = (status) => ({
+export const setPaymentDone = (status) => ({
   type: PaymentActionTypes.SET_PAYMENT_DONE,
   payload: status,
 });
