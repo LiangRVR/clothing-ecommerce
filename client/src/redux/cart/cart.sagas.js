@@ -28,7 +28,8 @@ export function* editCartItemsOnFirebase(cartItems) {
 }
 
 export function* clearCartOnFirebase() {
-    yield editCartItemsOnFirebase([]);
+  console.log("clearCartOnFirebase");
+  yield editCartItemsOnFirebase([]);
 }
 
 export function* updateUserCartItemsOnFirebase() {
@@ -41,6 +42,7 @@ export function* clearCartOnSignOut() {
 }
 
 export function* getUserCartItemsFromFirebase({ payload: { id } }) {
+  console.log(actionHistory);
   try {
     const userCartRef = yield call(getUserCartRef, id);
     const userCartSnapshot = yield call(getDoc, userCartRef);
@@ -48,12 +50,15 @@ export function* getUserCartItemsFromFirebase({ payload: { id } }) {
     const indexOfSignInSucces = actionHistory.lastIndexOf(
       UserActionsTypes.SIGN_IN_SUCCESS
     );
-    if (
-      cartItems.length !== 0 &&
-      actionHistory[indexOfSignInSucces - 1] !==
-        UserActionsTypes.CHECK_USER_SESSION
-    ) {
-      yield put(addCartsItemsfromFirebase(cartItems));
+    const nearSeccionStarted =
+      actionHistory[indexOfSignInSucces - 1] ===
+        UserActionsTypes.GOOGLE_SIGN_IN_START ||
+      actionHistory[indexOfSignInSucces - 1] ===
+        UserActionsTypes.EMAIL_SIGN_IN_START;
+    if (nearSeccionStarted) {
+      if (cartItems.length !== 0) {
+        yield put(addCartsItemsfromFirebase(cartItems));
+      }
       yield updateUserCartItemsOnFirebase();
     }
   } catch (error) {
@@ -78,6 +83,7 @@ export function* onCartChanges() {
       CartActionsTypes.ADD_CARTS_ITEMS_FROM_FIREBASE,
       CartActionsTypes.ADD_ITEMS,
       CartActionsTypes.REMOVE_ITEM,
+      CartActionsTypes.CLEAR_ITEM_FROM_CART,
     ],
     updateUserCartItemsOnFirebase
   );
@@ -91,8 +97,10 @@ export function* onClearCartOnFirebase() {
 }
 
 export function* cartSagas() {
-  yield all(
-    [call(onSingOutSucces), call(onSignInSucces), call(onCartChanges),call(onClearCartOnFirebase)]
-
-  );
+  yield all([
+    call(onSingOutSucces),
+    call(onSignInSucces),
+    call(onCartChanges),
+    call(onClearCartOnFirebase),
+  ]);
 }
