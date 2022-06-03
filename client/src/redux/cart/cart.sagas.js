@@ -28,7 +28,6 @@ export function* editCartItemsOnFirebase(cartItems) {
 }
 
 export function* clearCartOnFirebase() {
-  console.log("clearCartOnFirebase");
   yield editCartItemsOnFirebase([]);
 }
 

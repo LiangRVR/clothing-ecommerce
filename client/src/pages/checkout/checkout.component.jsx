@@ -24,6 +24,7 @@ const CheckOut = () => {
     useSelector(selectCartItems),
     useSelector(selectCartTotal),
   ];
+  console.log({cartItems, total})
   const navigate = useNavigate();
 
   return (
@@ -56,8 +57,8 @@ const CheckOut = () => {
         <br />
         4242 4242 4242 4242 - Exp: Any future date - CVV: 123
       </WarningContainer>
-      <CustomButton onClick={() => navigate("/checkout/payment")}>
-        Pay Now
+      <CustomButton onClick={() => navigate("../payment")} disabled={!total}>
+        {!total ? "Cart is Empty": "Pay Now"}
       </CustomButton>
     </CheckoutPageContainer>
   );

@@ -154,6 +154,7 @@ const Shipping = () => {
           <FormInput
             type="text"
             label="ZIP Code"
+            pattern="^\d{5}|^\d{5}-\d{4}"
             name="zipCode"
             maxlength="10"
             minlength="5"
@@ -165,6 +166,7 @@ const Shipping = () => {
 
         <FormInput
           type="tel"
+          pattern="^\(?(\d{3})\)?[-]?(\d{3})[-]?(\d{4})$"
           label="Phone Number"
           name="phoneNumber"
           value={contact.phoneNumber}

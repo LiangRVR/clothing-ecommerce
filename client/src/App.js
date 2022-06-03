@@ -10,7 +10,6 @@ import ErrorBoundary from "./components/error-boundary/error-boundary.component"
 import { GlobalStyle } from "./global.styles";
 
 //redux
-import { selectCurrentuser } from "./redux/user/user.selector";
 import { checkUserSession } from "./redux/user/user.actions";
 import { selectPaymentDone } from "./redux/payment/payment.selectors";
 
@@ -25,9 +24,11 @@ const Payment = lazy(() => import("./pages/payment/payment.component"));
 const PaymentSucces = lazy(() =>
   import("./pages/payment-success/payment-success.component")
 );
+const RequireAuth = lazy(() =>
+  import("./components/require-auth/require-auth.component")
+);
 
 const App = () => {
-  const currentUser = useSelector(selectCurrentuser);
   const paymentDone = useSelector(selectPaymentDone);
   const dispatch = useDispatch();
 
@@ -43,35 +44,31 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Header />}>
               <Route index element={<HomePage />} />
-              <Route path="shop" element={<ShopPage />} />
-              <Route path="checkout" element={<CheckOut />}>
+              <Route path="shop/*" element={<ShopPage />} />
+              <Route path="checkout" element={<CheckOut />} />
+              <Route path="payment">
                 <Route
-                  path="payment"
-                  element={currentUser ? <Payment /> : <Authentication />}
-                >
-                  <Route
-                    path="done"
-                    element={
-                      paymentDone ? (
-                        <PaymentSucces />
-                      ) : (
-                        <Navigate to="/" replace={true} />
-                      )
-                    }
-                  />
-                </Route>
+                  index
+                  element={
+                    <RequireAuth>
+                      <Payment />
+                    </RequireAuth>
+                  }
+                />
+                <Route
+                  path="done"
+                  element={
+                    paymentDone ? (
+                      <PaymentSucces />
+                    ) : (
+                      <Navigate to="/" replace />
+                    )
+                  }
+                />
               </Route>
 
-              <Route
-                path="auth"
-                element={
-                  currentUser ? (
-                    <Navigate to="/" replace={true} />
-                  ) : (
-                    <Authentication />
-                  )
-                }
-              />
+              <Route path="auth" element={<Authentication />} />
+              <Route path="*" element={<Navigate to="/" replace />} />
             </Route>
           </Routes>
         </Suspense>

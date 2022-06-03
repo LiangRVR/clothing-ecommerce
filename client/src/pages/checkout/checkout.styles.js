@@ -11,6 +11,14 @@ export const CheckoutPageContainer = styled.div`
     margin-left: auto;
     margin-top: 20px;
   }
+  button:disabled {
+    opacity: 0.5;
+    cursor: default;
+  }
+  button:disabled div {
+    border: 3px solid black;
+    border-top-color: white;
+  }
   @media screen and (max-width: 800px){
     width: 90%;
   }

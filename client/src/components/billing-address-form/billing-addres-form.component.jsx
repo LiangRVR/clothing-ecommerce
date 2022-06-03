@@ -207,6 +207,7 @@ const Billing = () => {
             type="text"
             label="ZIP Code"
             name="zipCode"
+            pattern="^\d{5}|^\d{5}-\d{4}"
             maxlength="10"
             minlength="5"
             required

@@ -24,7 +24,7 @@ const ShopPage = () => {
     <Suspense fallback={<Spinner />}>
       <Routes>
         <Route index element={<CollectionsOverviewContainer />} />
-        <Route path=":collectionId" element={<h1>Hola</h1>} />
+        <Route path=":collectionId" element={<CollectionPageContainer />} />
       </Routes>
     </Suspense>
   );

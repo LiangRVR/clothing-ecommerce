@@ -14,7 +14,6 @@ import {
 
 const CollectionPage = () => {
   const { collectionId } = useParams();
-  console.log(collectionId)
   const { title, items } = useSelector(selectCollection(collectionId));
   useEffect(()=>{
     window.scroll(0, 0);
