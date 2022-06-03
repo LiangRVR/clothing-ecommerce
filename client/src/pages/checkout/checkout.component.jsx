@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { useHistory } from "react-router";
+import { useNavigate } from "react-router";
 
 import {
   selectCartItems,
@@ -24,7 +24,7 @@ const CheckOut = () => {
     useSelector(selectCartItems),
     useSelector(selectCartTotal),
   ];
-  const history = useHistory();
+  const navigate = useNavigate();
 
   return (
     <CheckoutPageContainer>
@@ -56,7 +56,7 @@ const CheckOut = () => {
         <br />
         4242 4242 4242 4242 - Exp: Any future date - CVV: 123
       </WarningContainer>
-      <CustomButton onClick={() => history.push("/checkout/payment")}>
+      <CustomButton onClick={() => navigate("/checkout/payment")}>
         Pay Now
       </CustomButton>
     </CheckoutPageContainer>

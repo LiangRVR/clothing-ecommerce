@@ -1,4 +1,5 @@
-import React from "react";
+import React, { Fragment } from "react";
+import { Outlet } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
 import { selectCartHidden } from "../../redux/cart/cart.selectors";
@@ -28,24 +29,27 @@ const Header = () => {
   };
 
   return (
-    <HeaderContainer>
-      <LogoContainer to="/">
-        <Logo className="logo" />
-      </LogoContainer>
-      <OptionsConatiner>
-        <OptionLink to="/shop">SHOP</OptionLink>
-        <OptionLink to="/shop">CONTACT</OptionLink>
-        {currentUser ? (
-          <OptionLink as="div" onClick={handleClick}>
-            SIGN OUT
-          </OptionLink>
-        ) : (
-          <OptionLink to="/signin">SIGN IN</OptionLink>
-        )}
-        <CartIcon />
-      </OptionsConatiner>
-      {hidden ? null : <CartDropdown />}
-    </HeaderContainer>
+    <Fragment>
+      <HeaderContainer>
+        <LogoContainer to="/">
+          <Logo className="logo" />
+        </LogoContainer>
+        <OptionsConatiner>
+          <OptionLink to="shop">SHOP</OptionLink>
+          <OptionLink to="shop">CONTACT</OptionLink>
+          {currentUser ? (
+            <OptionLink as="div" onClick={handleClick}>
+              SIGN OUT
+            </OptionLink>
+          ) : (
+            <OptionLink to="auth">SIGN IN</OptionLink>
+          )}
+          <CartIcon />
+        </OptionsConatiner>
+        {hidden ? null : <CartDropdown />}
+      </HeaderContainer>
+      <Outlet />
+    </Fragment>
   );
 };
 

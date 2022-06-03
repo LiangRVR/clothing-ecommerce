@@ -1,5 +1,5 @@
 import React from "react";
-import { useHistory, useRouteMatch } from "react-router-dom";
+import { useNavigate} from "react-router-dom";
 
 import {
   CollectionPreviewContainer,
@@ -11,12 +11,11 @@ import CollectionItem from "../collection-item/collection-item.component";
 
 
 const CollectionPreview = ({ title, items, routeName }) => {
-  const history = useHistory();
-  const match = useRouteMatch();
+  const navigate = useNavigate();
   return (
     <CollectionPreviewContainer>
       <TitleContainer
-        onClick={() => history.push(`${match.path}/${routeName}`)}
+        onClick={() => navigate(routeName)}
       >
         {title.toUpperCase()}
       </TitleContainer>

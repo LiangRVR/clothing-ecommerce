@@ -3,15 +3,15 @@ import React from "react";
 import SignIn from "../../components/sign-in/sign-in.component";
 import SignUp from "../../components/sign-up/sign-up.component";
 
-import { SignInAndSignUpContainer } from "./sign-in-and-sign-up.styles";
+import { AuthenticationContainer } from "./authentication.styles";
 
-const SignInAndSignUp = () => {
+const Authentication = () => {
   return (
-    <SignInAndSignUpContainer>
+    <AuthenticationContainer>
       <SignIn />
       <SignUp />
-    </SignInAndSignUpContainer>
+    </AuthenticationContainer>
   );
 };
 
-export default SignInAndSignUp;
+export default Authentication;

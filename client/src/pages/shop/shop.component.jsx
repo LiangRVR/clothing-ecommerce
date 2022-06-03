@@ -1,5 +1,5 @@
 import React, { useEffect, lazy, Suspense } from "react";
-import { Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
 import { fetchCollectionsStart } from "../../redux/shop/shop.actions";
@@ -13,28 +13,20 @@ const CollectionPageContainer = lazy(() =>
   import("../collection/collection.container")
 );
 
-const ShopPage = ({ match }) => {
+const ShopPage = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchCollectionsStart());
   }, [dispatch]);
-  
+
   return (
-    <div className="shop-page">
-      <Suspense fallback={<Spinner />}>
-        <Route
-          exact
-          path={`${match.path}`}
-          component={CollectionsOverviewContainer}
-        />
-        <Route
-          exact
-          path={`${match.path}/:collectionId`}
-          component={CollectionPageContainer}
-        />
-      </Suspense>
-    </div>
+    <Suspense fallback={<Spinner />}>
+      <Routes>
+        <Route index element={<CollectionsOverviewContainer />} />
+        <Route path=":collectionId" element={<h1>Hola</h1>} />
+      </Routes>
+    </Suspense>
   );
 };
 

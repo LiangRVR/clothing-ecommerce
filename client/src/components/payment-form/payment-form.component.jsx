@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useStripe, useElements } from "@stripe/react-stripe-js";
 
-import { useParams, useHistory } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setPaymentDone } from "../../redux/payment/payment.actions";
 
@@ -20,7 +20,7 @@ const PaymentForm = () => {
   const elements = useElements();
   const params = useParams();
   const dispatch = useDispatch();
-  const history = useHistory();
+  const navigate = useNavigate();
   const paymentDoneHandler = (status) => dispatch(setPaymentDone(status));
 
   const [message, setMessage] = useState(null);
@@ -85,7 +85,7 @@ const PaymentForm = () => {
       paymentDoneHandler(false);
       return
     }
-      history.push("/checkout/payment/done")
+      navigate("done")
   };
 
   return (

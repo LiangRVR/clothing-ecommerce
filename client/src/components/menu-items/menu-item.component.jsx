@@ -1,5 +1,5 @@
 import React from "react";
-import { useHistory, useRouteMatch } from "react-router-dom";
+import { useNavigate} from "react-router-dom";
 
 import {
   MenuItemContainer,
@@ -10,12 +10,11 @@ import {
 } from "./menu-item.styles";
 
 const MenuItem = ({ title, imageUrl, size, linkUrl}) => {
-  const history = useHistory();
-  const match = useRouteMatch();
+  const navigate = useNavigate();
   return (
     <MenuItemContainer
       size={size}
-      onClick={() => history.push(`${match.url}${linkUrl}`)}
+      onClick={() => navigate(`${linkUrl}`)}
     >
       <BackgroundImageContainer
         className="background-image"

@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useHistory } from "react-router";
+import { useNavigate } from "react-router";
 
 import { clearCartOnFirebaseAndState } from "../../redux/cart/cart.actions";
 import { changeActiveForm, setPaymentDone } from "../../redux/payment/payment.actions";
@@ -30,7 +30,7 @@ const PaymentSucces = () => {
     useSelector(selectCartItems),
     useSelector(selectCartTotal),
   ];
-  const history = useHistory();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const {
     addressLine1,
@@ -46,7 +46,7 @@ const PaymentSucces = () => {
     dispatch(changeActiveForm("Shipping Address"));
     dispatch(clearCartOnFirebaseAndState());
     dispatch(setPaymentDone(false))
-    history.push("/");
+    navigate("/");
   };
 
   return (
