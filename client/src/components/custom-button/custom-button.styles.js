@@ -36,7 +36,7 @@ const googleSignInStyles = css`
 `;
 
 const getButtonStyles = (props) => {
-  if (props.isGoogleSigIn) {
+  if (props.isGoogleSignIn) {
     return googleSignInStyles;
   }
 
@@ -59,4 +59,9 @@ export const CustomButtonContainer = styled.button`
   justify-content: center;
 
   ${getButtonStyles}
+
+  :disabled {
+    opacity: 0.5;
+    cursor: default;
+  }
 `;

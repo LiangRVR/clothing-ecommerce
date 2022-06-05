@@ -14,10 +14,6 @@ export const FormContainer = styled.form`
   width: 100%;
   min-width: 500px;
   align-self: center;
-  button:disabled {
-    opacity: 0.5;
-    cursor: default;
-  }
   button:disabled div {
     border: 3px solid black;
     border-top-color: white;
