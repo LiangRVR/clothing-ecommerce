@@ -4,17 +4,19 @@ import { useDispatch } from "react-redux";
 import FormInput from "../form-input/form-input.componrnt";
 import CustomButton from "../custom-button/custom-button.component";
 
+import { signUpStart } from "../../redux/user/user.actions";
+
 import { SignUpContainer, SignUpTitle } from "./sign-up.styles";
 
-const SignUp = ({ signUpStart }) => {
+const SignUp = () => {
   const [userCredentials, setCredentials] = useState({
     displayName: "",
     email: "",
     password: "",
     confirmPassword: "",
   });
-  
-  const dispatch = useDispatch;
+
+  const dispatch = useDispatch();
   const signUpStartHandler = (userCredentials) =>
     dispatch(signUpStart(userCredentials));
 
