@@ -46,10 +46,6 @@ GoogleProvider.setCustomParameters({
   prompt: "select_account",
 });
 
-export const credentialResult = GoogleAuthProvider.credentialFromResult;
-
-export const credentialError = GoogleAuthProvider.credentialFromError;
-
 export const signInWithGooglePopup = () =>
   signInWithPopup(auth, GoogleProvider);
 
