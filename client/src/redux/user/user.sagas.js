@@ -18,6 +18,7 @@ import {
   getCurrentUser,
   signOutAccount,
 } from "../../firebase/firebase.utils";
+
 import { getDoc } from "firebase/firestore";
 
 export function* getSnapshotFromUserAuth(user, additionalData) {
@@ -76,6 +77,10 @@ export function* signOut() {
   }
 }
 
+export function* signInAfterSignUp({ payload: { user, additionalData } }) {
+  yield getSnapshotFromUserAuth(user, additionalData);
+}
+
 export function* onGoogleSignInStart() {
   yield takeLatest(UserActionsTypes.GOOGLE_SIGN_IN_START, signInWithGoogle);
 }
@@ -84,16 +89,12 @@ export function* onEmailSignInStart() {
   yield takeLatest(UserActionsTypes.EMAIL_SIGN_IN_START, signInWithEmail);
 }
 
-export function* sigInAfterSignUp({ payload: { user, additionalData } }) {
-  yield getSnapshotFromUserAuth(user, additionalData);
-}
-
 export function* onSignUpStart() {
   yield takeLatest(UserActionsTypes.SIGN_UP_START, signUp);
 }
 
 export function* onSignUpSuccess() {
-  yield takeLatest(UserActionsTypes.SIGN_UP_SUCCESS, sigInAfterSignUp);
+  yield takeLatest(UserActionsTypes.SIGN_UP_SUCCESS, signInAfterSignUp);
 }
 
 export function* onSignOutStart() {

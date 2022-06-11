@@ -8,8 +8,6 @@ import {
   signUpFailure,
 } from "../user.actions";
 
-import userActions from "../user.actions";
-
 const initialState = {
   currentUser: null,
   error: null,
@@ -46,9 +44,4 @@ describe("testing userReducer", () => {
       mockError
     );
   });
-
-  it("test",()=>{
-      console.log(JSON.stringify(userActions))
-
-  })
 });
