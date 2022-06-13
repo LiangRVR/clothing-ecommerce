@@ -9,7 +9,7 @@ export const addItem = (item) => ({
   payload: item,
 });
 
-export const addCartsItemsfromFirebase = (items) => ({
+export const addCartsItemsFromFirebase = (items) => ({
   type: CartActionsTypes.ADD_CARTS_ITEMS_FROM_FIREBASE,
   payload: items,
 });

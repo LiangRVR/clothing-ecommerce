@@ -1,10 +1,10 @@
 import { all, takeLatest, call, put, select } from "redux-saga/effects";
 
 import UserActionsTypes from "../user/user.types";
-import { selectCurrentuser } from "../user/user.selector";
+import { selectCurrentUser } from "../user/user.selector";
 import {
   clearCartOnState,
-  addCartsItemsfromFirebase,
+  addCartsItemsFromFirebase,
   updateCartItemsOnFirebase,
 } from "./cart.actions";
 import { CartActionsTypes } from "./cart.types";
@@ -15,7 +15,7 @@ import { updateDoc } from "firebase/firestore";
 import { actionHistory } from "../store";
 
 export function* editCartItemsOnFirebase(cartItems) {
-  const currentUser = yield select(selectCurrentuser);
+  const currentUser = yield select(selectCurrentUser);
   yield put(updateCartItemsOnFirebase());
   try {
     if (currentUser) {
@@ -56,7 +56,7 @@ export function* getUserCartItemsFromFirebase({ payload: { id } }) {
         UserActionsTypes.EMAIL_SIGN_IN_START;
     if (nearSeccionStarted) {
       if (cartItems.length !== 0) {
-        yield put(addCartsItemsfromFirebase(cartItems));
+        yield put(addCartsItemsFromFirebase(cartItems));
       }
       yield updateUserCartItemsOnFirebase();
     }

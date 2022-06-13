@@ -18,14 +18,14 @@ describe("testing userReducer", () => {
     expect(userReducer(undefined, {})).toEqual(initialState);
   });
 
-  it("should set currentUser to payload on signInSucces action", () => {
+  it("should set currentUser to payload on signInSuccess action", () => {
     const mockUser = { id: 1, userName: "Liang Villarrubia" };
     expect(
       userReducer(initialState, signInSuccess(mockUser)).currentUser
     ).toEqual(mockUser);
   });
 
-  it("should set currentUser to null on signOutSucces action", () => {
+  it("should set currentUser to null on signOutSuccess action", () => {
     expect(userReducer(initialState, signOutSuccess()).currentUser).toBe(null);
   });
 

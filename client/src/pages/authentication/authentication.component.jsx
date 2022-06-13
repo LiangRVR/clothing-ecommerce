@@ -4,12 +4,12 @@ import SignIn from "../../components/sign-in/sign-in.component";
 import SignUp from "../../components/sign-up/sign-up.component";
 
 import { AuthenticationContainer } from "./authentication.styles";
-import { selectCurrentuser } from "../../redux/user/user.selector";
+import { selectCurrentUser } from "../../redux/user/user.selector";
 import { useSelector } from "react-redux";
 import { Navigate, useLocation } from "react-router-dom";
 
 const Authentication = () => {
-  const currentUser = useSelector(selectCurrentuser);
+  const currentUser = useSelector(selectCurrentUser);
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
 
