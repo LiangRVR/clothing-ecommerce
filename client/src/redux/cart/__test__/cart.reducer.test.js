@@ -7,12 +7,14 @@ import {
   toggleCartHidden,
 } from "../cart.actions";
 import cartReducer from "../cart.reducer";
-const initialState = {
-  hidden: true,
-  cartItems: [],
-};
+
 
 describe("testing cartReducer", () => {
+  const initialState = {
+    hidden: true,
+    cartItems: [],
+  };
+  
   const mockItem = {
     id: 1,
     quantity: 1,

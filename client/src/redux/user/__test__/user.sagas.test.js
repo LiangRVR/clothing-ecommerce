@@ -290,12 +290,12 @@ describe("testing user sagas", () => {
     it("should put SignInSuccess", () => {
       const mockUserSnapshot = {
         id: mockUser.user.id,
-        data: jest.fn().mockImplementation(() => {
+        data: () => {
           return {
             email: mockEmail,
             displayName: mockDisplayName,
           };
-        }),
+        },
       };
       expect(generator.next(mockUserSnapshot).value).toEqual(
         put(

@@ -41,20 +41,19 @@ export function* clearCartOnSignOut() {
 }
 
 export function* getUserCartItemsFromFirebase({ payload: { id } }) {
-  console.log(actionHistory);
   try {
     const userCartRef = yield call(getUserCartRef, id);
     const userCartSnapshot = yield call(getDoc, userCartRef);
     const cartItems = userCartSnapshot.data().cartItems;
-    const indexOfSignInSucces = actionHistory.lastIndexOf(
+    const indexOfSignInSuccess = actionHistory.lastIndexOf(
       UserActionsTypes.SIGN_IN_SUCCESS
     );
-    const nearSeccionStarted =
-      actionHistory[indexOfSignInSucces - 1] ===
+    const nearSessionStarted =
+      actionHistory[indexOfSignInSuccess - 1] ===
         UserActionsTypes.GOOGLE_SIGN_IN_START ||
-      actionHistory[indexOfSignInSucces - 1] ===
+      actionHistory[indexOfSignInSuccess - 1] ===
         UserActionsTypes.EMAIL_SIGN_IN_START;
-    if (nearSeccionStarted) {
+    if (nearSessionStarted) {
       if (cartItems.length !== 0) {
         yield put(addCartsItemsFromFirebase(cartItems));
       }
@@ -65,11 +64,11 @@ export function* getUserCartItemsFromFirebase({ payload: { id } }) {
   }
 }
 
-export function* onSingOutSucces() {
+export function* onSingOutSuccess() {
   yield takeLatest(UserActionsTypes.SIGN_OUT_SUCCESS, clearCartOnSignOut);
 }
 
-export function* onSignInSucces() {
+export function* onSignInSuccess() {
   yield takeLatest(
     UserActionsTypes.SIGN_IN_SUCCESS,
     getUserCartItemsFromFirebase
@@ -97,8 +96,8 @@ export function* onClearCartOnFirebase() {
 
 export function* cartSagas() {
   yield all([
-    call(onSingOutSucces),
-    call(onSignInSucces),
+    call(onSingOutSuccess),
+    call(onSignInSuccess),
     call(onCartChanges),
     call(onClearCartOnFirebase),
   ]);
